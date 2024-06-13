@@ -6,6 +6,8 @@ import { redisStore } from 'cache-manager-redis-yet';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HttpModule } from '@nestjs/axios';
+import { AppWebhookHandlerService } from './app.webhook';
 
 @Module({
   imports: [
@@ -34,8 +36,9 @@ import { AppService } from './app.service';
       },
       inject: [ConfigService],
     }),
+    HttpModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppWebhookHandlerService],
 })
 export class AppModule {}
